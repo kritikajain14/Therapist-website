@@ -189,7 +189,7 @@ const DrMayaReynoldsTherapy = () => {
           </p>
 
           <div className="pt-4">
-            <button className="bg-white/40 backdrop-blur-md border border-white/40 px-8 py-3 rounded-full shadow-md hover:bg-white/60 transition-all duration-300">
+            <button className="bg-white/40 backdrop-blur-md border border-white/40 px-8 py-2 rounded-full shadow-md hover:bg-[#bfa0c5] transition-all duration-300">
               Learn More About Maya
             </button>
           </div>
