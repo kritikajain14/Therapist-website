@@ -5,6 +5,8 @@ const DrMayaReynoldsTherapy = () => {
   const [openAccordion, setOpenAccordion] = useState(null);
   const [openFAQ, setOpenFAQ] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const sectionRefs = useRef([]);
 
   useEffect(() => {
@@ -45,31 +47,80 @@ const DrMayaReynoldsTherapy = () => {
   return (
     <div className="min-h-screen bg-[#E1D1D7] font-sans">
       {/* Navbar */}
-      <nav className={` left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-5'} ${isScrolled ? 'backdrop-blur-lg bg-white/40 border-b border-white/30 shadow-lg' : 'backdrop-blur-md bg-white/20'}`}>
+      <nav className={`left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-5'} ${isScrolled ? 'backdrop-blur-lg bg-white/40 border-b border-white/30 shadow-lg' : 'backdrop-blur-md bg-white/20'}`}>
+
         <div className="max-w-7xl mx-auto px-6 md:px-12">
+
           <div className="flex items-center justify-between">
+
+            {/* Logo */}
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#4F5980] to-[#856B7D]"></div>
-              <span className="text-2xl font-serif font-bold text-[#3E3E43]">Dr. Maya Reynolds</span>
+              <span className="text-2xl font-serif font-bold text-[#3E3E43]">
+                Dr. Maya Reynolds
+              </span>
             </div>
 
+            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               {['Home', 'Blog', 'Contact'].map((item) => (
-                <a key={item} href="#" className="text-[#3E3E43] hover:text-[#4F5980] transition-colors duration-300 font-medium">
+                <a
+                  key={item}
+                  href="#"
+                  className="text-[#3E3E43] hover:text-[#4F5980] transition-colors duration-300 font-medium"
+                >
                   {item}
                 </a>
               ))}
+
               <button className="bg-[#4F5980] text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl">
                 Book Consultation
               </button>
             </div>
 
-            <button className="md:hidden text-[#3E3E43]">
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-[#3E3E43]"
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
               </svg>
             </button>
+
           </div>
+
+          {/* Mobile Dropdown Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4 backdrop-blur-lg bg-white/70 border border-white/40 rounded-xl p-6 shadow-lg">
+
+              <div className="flex flex-col space-y-4">
+                {['Home', 'Blog', 'Contact'].map((item) => (
+                  <a
+                    key={item}
+                    href="#"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-[#3E3E43] hover:text-[#4F5980] font-medium"
+                  >
+                    {item}
+                  </a>
+                ))}
+
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="bg-[#4F5980] text-white px-6 py-3 rounded-full shadow-lg"
+                >
+                  Book Consultation
+                </button>
+              </div>
+
+            </div>
+          )}
+
         </div>
       </nav>
 
@@ -319,10 +370,10 @@ const DrMayaReynoldsTherapy = () => {
             </div>
 
             <div className="flex justify-center items-center">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
 
                 {/* Top Left */}
-                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
+                <div className="aspect-square w-36 sm:w-44 md:w-48 lg:w-56 rounded-2xl overflow-hidden shadow-xl">
                   <img
                     src="/office1.jpeg"
                     alt="Office Interior"
@@ -331,7 +382,7 @@ const DrMayaReynoldsTherapy = () => {
                 </div>
 
                 {/* Top Right */}
-                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
+                <div className="aspect-square w-36 sm:w-44 md:w-48 lg:w-56 rounded-2xl overflow-hidden shadow-xl">
                   <img
                     src="/office2.jpeg"
                     alt="Therapy Room"
@@ -341,7 +392,7 @@ const DrMayaReynoldsTherapy = () => {
 
                 {/* Bottom Center */}
                 <div className="col-span-2 flex justify-center">
-                  <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
+                  <div className="aspect-square w-36 sm:w-44 md:w-48 lg:w-56 rounded-2xl overflow-hidden shadow-xl mt-1 md:mt-2">
                     <img
                       src="/officearea.png"
                       alt="Waiting Area"
@@ -352,8 +403,6 @@ const DrMayaReynoldsTherapy = () => {
 
               </div>
             </div>
-
-
           </div>
         </div>
       </section>
